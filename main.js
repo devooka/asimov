@@ -65,6 +65,13 @@
    })
 
 
+    var editor = document.getElementsByClassName("mce")[0];
+    editor.value="Lorem impsum dolor";
+    
+    var selcat =  document.getElementsByName("category_id")[0];
+    console.log(selcat);
+    selcat.value=2;
+    selcat.trigger("chosen:updated");
 
 
 
