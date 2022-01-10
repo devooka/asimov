@@ -1,5 +1,5 @@
 # Asimov
-Scripts para inserção de informações em formulários web com anexação de imagens via url.
+Scripts para inserção automatiazda de informações em formulário de notícas com anexação de imagens via url.
 
 **Requisitos**
 - Extensão TamperMonkey - [Chrome Web Store](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
@@ -7,7 +7,7 @@ Scripts para inserção de informações em formulários web com anexação de i
 - Banco de dados/imagens
 
 # Uso
-Para utilizar basta copiar/importar os códigos principais dentro do TamperMonkey nas páginas que deseja realizar a inserção de dados.
+Para utilizar basta copiar/importar os códigos principais dentro do TamperMonkey na página do formulário.
 
 Este repositório foi criando com o intuito de agilizar o processo de importação de backup de um site[^1].
 
