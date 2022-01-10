@@ -12,26 +12,39 @@
 (function() {
     'use strict';
 
-    console.log("Tropa da Ooka 171!");
-    var inputs = document.getElementsByTagName("TEXTAREA");
+    const urlDados = 'http://goiatins.localhost:8080/admin/php/escolas/loadEscolas.php?p=educacao';
+    var arrDados;
 
-    var titulo = inputs[0];
-    //console.log(titulo);
-    titulo.value = "Lorem impsum dolor";
-    var subtitulo = inputs[1];
-    console.log(subtitulo);
-    subtitulo.value = "Lorem impsum dolor";
+     fetch(urlDados)
+        .then((resp) => resp.json())
+        .then(function(data) {
+           arrDados = data;
 
-   // var form = document.getElementsByClassName("we-form")[0];
-  //   var fd = new FormData(form);
+         console.log(arrDados);
+         arrDados.forEach(function (item,index){
+            preencheForm(item);
+         });
 
-  //   fd.set("cover", new Blob(['imagem-cover']), 'https://www.carmolandia.to.gov.br/storage/hellobars-covers/2022/01/hello-id-35-t-1641466853.jpg');
 
-  //   for(let pair of fd.entries()) {
-  //       console.log(pair[0], pair[1]);
-  //   }
+    })
+        .catch(function(error) {
+        console.log(error);
+    });
+    function preencheForm(item){
 
-    var inp = document.getElementsByName("cover")[0];
+        var inputs = document.getElementsByTagName("TEXTAREA");
+
+        var titulo = inputs[0];
+        //console.log(titulo);
+        titulo.value = item.nome;
+        var subtitulo = inputs[1];
+        //console.log(subtitulo);
+        subtitulo.value = item.endereco;
+
+    }
+
+   var inp = document.getElementsByName("cover")[0];
+
 
     let url = 'http://goiatins.localhost:8080/admin/assets/images/logos-muns/goiatins/1.png'
     const toDataURL = url => fetch(url)
@@ -56,9 +69,9 @@
 
   toDataURL(url)
   .then(dataUrl => {
-     console.log('Here is Base64 Url', dataUrl)
+     //console.log('Here is Base64 Url', dataUrl)
      var fileData = dataURLtoFile(dataUrl, "imageName.jpg");
-     console.log("Here is JavaScript File Object",fileData)
+     //console.log("Here is JavaScript File Object",fileData)
       const dT = new DataTransfer();
       dT.items.add(fileData);
       inp.files = dT.files;
@@ -67,13 +80,17 @@
 
     var editor = document.getElementsByClassName("mce")[0];
     editor.value="Lorem impsum dolor";
-    
-    var selcat =  document.getElementsByName("category_id")[0];
-    console.log(selcat);
+
+    var datapubli = document.getElementsByName("date_at")[0];
+    datapubli.value = "10/01/2021 00:00";
+
+    var selcat = document.getElementsByName("category_id")[0];
+    //console.log(selcat);
     selcat.value=2;
-    selcat.trigger("chosen:updated");
 
-
+    var status = document.getElementsByName("status")[0];
+    //console.log(selcat);
+    status.value='active';
 
 
 
