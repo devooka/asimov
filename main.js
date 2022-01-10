@@ -12,7 +12,7 @@
 (function() {
     'use strict';
 
-    const urlDados = 'http://goiatins.localhost:8080/admin/php/escolas/loadEscolas.php?p=educacao';
+    const urlDados = 'http://goiatins.localhost:8080/admin/php/loadMidias.php';
     var arrDados;
 
     var formulario = document.getElementsByClassName("we-form")[0];
@@ -26,8 +26,8 @@
 
          var pagina = document.getElementsByTagName("BODY")[0].innerHTML.toString();
          var encontra = 'redirect';
-         console.log(pagina);
-         console.log(pagina.indexOf(encontra));
+         //console.log(pagina);
+         //console.log(pagina.indexOf(encontra));
          if(pagina.indexOf(encontra)>-1){
              console.log("Notícia enviada!");
              window.open('https://www.carmolandia.to.gov.br/admin/posts/home/-1/-1/all/all/all/1','_parent');
@@ -35,8 +35,8 @@
          }
 
          preencheForm(arrDados[0]);
-         console.log("Enviando...");
-         formulario.submit();
+         //console.log("Enviando...");
+         //formulario.submit();
 
 
 
@@ -52,18 +52,19 @@
 
         var titulo = inputs[0];
         //console.log(titulo);
-        titulo.value = item.nome;
+        titulo.value = item.titulo;
         var subtitulo = inputs[1];
         //console.log(subtitulo);
-        subtitulo.value = item.endereco;
+        subtitulo.value = "Publicado em "+item.data;
 
         anexarImagem(item);
 
         var editor = document.getElementsByClassName("mce")[0];
-        editor.value= item.telefoneprincipal;
+        console.log(item.conteudo);
+        editor.value= item.conteudo;
 
         var datapubli = document.getElementsByName("date_at")[0];
-        datapubli.value = "10/01/2021 00:00";
+        datapubli.value = item.created_at;
 
         var selcat = document.getElementsByName("category_id")[0];
         //console.log(selcat);
@@ -78,8 +79,10 @@
 
     function anexarImagem(item){
 
+        var imagem = item.imagens[0];
+
          var inp = document.getElementsByName("cover")[0];
-         let url = 'http://goiatins.localhost:8080/admin/assets/images/logos-muns/goiatins/1.png';
+         let url = 'http://goiatins.localhost:8080/admin/php/'+imagem.arquivo;
          toDataURL(url)
              .then(dataUrl => {
              //console.log('Here is Base64 Url', dataUrl)
